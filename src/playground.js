@@ -1,60 +1,72 @@
-// import { createStore } from "redux";
+import { createStore } from "redux";
 
-// const store = createStore((state = { count:0 }, action) => {
-//     switch(action.type) {
-//         case "INCREMENT":
-//             const incrementBy = typeof action.incrementBy === "number" ? action.incrementBy : 1;
-//             return {
-//                 count: state.count + incrementBy
-//             };
-//         case "DECREMENT":
-//             const decrementBy = typeof action.decrementBy === "number" ? action.decrementBy : 1;
-//             return {
-//                 count: state.count - decrementBy
-//             };
-//         case "SET":
-//             return {
-//                 count: action.count    
-//             };    
-//         case "RESET":
-//             return {
-//                 count: 0
-//             };
-//         default:
-//             return state;   
-//     }
-// });    
+const add = ({a, b}, c) => {
+    return a + b + c;
+};
+console.log(add({a: 1, b:12}, 100));
 
-// store.subscribe(() => {
-//     console.log(store.getState());
-// });
+const incrementCount = ({ incrementBy = 1 } = {}) => ({
+   type: "INCREMENT",
+   incrementBy
+});
+
+const decrementByCount = ({ decrementBy = 1 } = {}) => ({
+    type: "DECREMENT",
+    decrementBy
+});
+
+const setCount = ({ count }) => ({
+    type: "SET",
+    count
+});
+
+const resetCount = () => ({
+    type: "RESET"
+});
+
+const store = createStore((state = { count:0 }, action) => {
+    switch(action.type) {
+        case "INCREMENT":
+            return {
+                count: state.count + action.incrementBy
+            };
+        case "DECREMENT":
+            return {
+                count: state.count - action.decrementBy
+            };
+        case "SET":
+            return {
+                count: action.count    
+            };    
+        case "RESET":
+            return {
+                count: 0
+            };
+        default:
+            return state;   
+    }
+});    
+
+store.subscribe(() => {
+    console.log(store.getState());
+});
 
 // store.dispatch({
 //     type: "INCREMENT",
 //     incrementBy: 5
 // });
+store.dispatch(incrementCount({ incrementBy: 5 }));
 
-// store.dispatch({
-//     type: "INCREMENT"
-// });
+store.dispatch(incrementCount());
 
-// store.dispatch({
-//     type: "RESET"
-// });
+store.dispatch(resetCount());
 
-// store.dispatch({
-//     type: "DECREMENT",
-//     decrementBy: 10
-// });
+store.dispatch(decrementByCount());
 
-// store.dispatch({
-//     type: "DECREMENT"
-// });
+store.dispatch(decrementByCount({ decrementBy: 10 }));
 
-// store.dispatch({
-//     type: "SET",
-//     count: 101
-// });
+store.dispatch(setCount({ count: 101 }));
+
 
 // const person = {
 //     name: "Stacy",
@@ -85,7 +97,7 @@
 // const [, city, state = "Texas"] = address;
 // console.log(`You are in ${city}, ${state}`);
 
-const item = ["coffee(hot)", "$2.00", "$2.50", "$2.75"];
-const [coffee, , med] = item;
+// const item = ["coffee(hot)", "$2.00", "$2.50", "$2.75"];
+// const [coffee, , med] = item;
 
-console.log(`A medium ${coffee} costs ${med}.`);
+// console.log(`A medium ${coffee} costs ${med}.`);
