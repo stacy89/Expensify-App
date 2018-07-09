@@ -69,14 +69,23 @@
 
 // console.log(`${name} is ${age}.`)
 
-const book = {
-    title: "Ego is th enemy", 
-    author: "Ryan Holiday",
-    publisher: {
-        name: "Penguin"
-    }
-};
+// const book = {
+//     title: "Ego is th enemy", 
+//     author: "Ryan Holiday",
+//     publisher: {
+//         name: "Penguin"
+//     }
+// };
 
-const {name: publisherName = "Self-Published"} = book.publisher;
+// const {name: publisherName = "Self-Published"} = book.publisher;
 
-console.log(publisherName);
+// console.log(publisherName);
+
+// const address = ["1234 Channing Way", "Berkeley", "California", "95129"];
+// const [, city, state = "Texas"] = address;
+// console.log(`You are in ${city}, ${state}`);
+
+const item = ["coffee(hot)", "$2.00", "$2.50", "$2.75"];
+const [coffee, , med] = item;
+
+console.log(`A medium ${coffee} costs ${med}.`);
