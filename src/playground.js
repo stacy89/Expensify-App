@@ -1,69 +1,72 @@
-import { createStore } from "redux";
+// import { createStore } from "redux";
 
-const add = ({a, b}, c) => {
-    return a + b + c;
-};
-console.log(add({a: 1, b:12}, 100));
+// const add = ({a, b}, c) => {
+//     return a + b + c;
+// };
+// console.log(add({a: 1, b:12}, 100));
 
-const incrementCount = ({ incrementBy = 1 } = {}) => ({
-   type: "INCREMENT",
-   incrementBy
-});
+// const incrementCount = ({ incrementBy = 1 } = {}) => ({
+//    type: "INCREMENT",
+//    incrementBy
+// });
 
-const decrementByCount = ({ decrementBy = 1 } = {}) => ({
-    type: "DECREMENT",
-    decrementBy
-});
+// const decrementByCount = ({ decrementBy = 1 } = {}) => ({
+//     type: "DECREMENT",
+//     decrementBy
+// });
 
-const setCount = ({ count }) => ({
-    type: "SET",
-    count
-});
+// const setCount = ({ count }) => ({
+//     type: "SET",
+//     count
+// });
 
-const resetCount = () => ({
-    type: "RESET"
-});
+// const resetCount = () => ({
+//     type: "RESET"
+// });
 
-const countReducer = (state = { count:0 }, action) => {
-    switch(action.type) {
-        case "INCREMENT":
-            return {
-                count: state.count + action.incrementBy
-            };
-        case "DECREMENT":
-            return {
-                count: state.count - action.decrementBy
-            };
-        case "SET":
-            return {
-                count: action.count    
-            };    
-        case "RESET":
-            return {
-                count: 0
-            };
-        default:
-            return state;   
-    }
-};   
+// const countReducer = (state = { count:0 }, action) => {
+//     switch(action.type) {
+//         case "INCREMENT":
+//             return {
+//                 count: state.count + action.incrementBy
+//             };
+//         case "DECREMENT":
+//             return {
+//                 count: state.count - action.decrementBy
+//             };
+//         case "SET":
+//             return {
+//                 count: action.count    
+//             };    
+//         case "RESET":
+//             return {
+//                 count: 0
+//             };
+//         default:
+//             return state;   
+//     }
+// };   
 
-const store = createStore(countReducer);
+// const store = createStore(countReducer);
 
-store.subscribe(() => {
-    console.log(store.getState());
-});
+// store.subscribe(() => {
+//     console.log(store.getState());
+// });
 
-store.dispatch(incrementCount({ incrementBy: 5 }));
+// store.dispatch(incrementCount({ incrementBy: 5 }));
 
-store.dispatch(incrementCount());
+// store.dispatch(incrementCount());
 
-store.dispatch(resetCount());
+// store.dispatch(resetCount());
 
-store.dispatch(decrementByCount());
+// store.dispatch(decrementByCount());
 
-store.dispatch(decrementByCount({ decrementBy: 10 }));
+// store.dispatch(decrementByCount({ decrementBy: 10 }));
 
-store.dispatch(setCount({ count: 101 }));
+// store.dispatch(setCount({ count: 101 }));
+
+
+
 
 
 // const person = {
@@ -99,3 +102,55 @@ store.dispatch(setCount({ count: 101 }));
 // const [coffee, , med] = item;
 
 // console.log(`A medium ${coffee} costs ${med}.`);
+
+
+
+
+import { createStore, combineReducers } from "redux";
+
+const expensesReducerDefaultState = [];
+const expensesReducer = (state = expensesReducerDefaultState, action) => {
+    switch (action.type) {
+        default: 
+            return state;
+    }
+};
+
+const filtersReducerDefaultState = {
+    text: "",
+    sortBy: "date",
+    startDate: undefined,
+    endDate: undefined
+};
+
+const filtersReducer = (state = filtersReducerDefaultState, action) => {
+    switch (action.type) {
+        default:
+            return state;
+    }
+};
+
+const store = createStore(
+    combineReducers({
+        expenses: expensesReducer,
+        filters: filtersReducer
+    })
+);
+
+console.log(store.getState());
+
+const demoState = {
+    expenses: [{
+        id: "qwert",
+        description: "Jan Rent",
+        note: "Final payment for that address", 
+        amount: 60000,
+        createdAt: 0
+    }],
+    filters: {
+        text: "rent",
+        sortBy: "amount",
+        startDate: undefined,
+        endDate: undefined
+    }
+};
