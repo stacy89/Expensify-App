@@ -1,5 +1,3 @@
-// Get visiable expenses
-
 const getVisiableExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
     return expenses.filter((expense) => {
         const startDateMatch = typeof startDate !== "number" || expense.createdAt >= startDate;
