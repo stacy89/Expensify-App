@@ -10,4 +10,4 @@ const ExpenseListItem = ({ id, description, amount, createdAt}) => (
     </div>
 );
 
-export default ExpenseListItem;
+export default ExpenseListItem; 
